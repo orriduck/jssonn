@@ -1,0 +1,100 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# JSON Utility Web Application Guide
+
+## Project Overview
+This is a modern web application built to provide utilities for working with JSON data. The application offers features like JSON beautification, node-by-node viewing, and subtree visualization.
+
+## Tech Stack
+- **Package Manager**: pnpm
+- **Build Tool**: Vite
+- **Frontend Framework**: React
+- **Styling**: Tailwind CSS
+- **Component Library**: shadcn/ui
+- **Node Version**: 22.0.0 (Experimental/Development)
+  > Note: This project uses Node.js 22 which is currently in development/experimental stage. For production environments, consider using Node.js 20 LTS.
+
+## Project Structure
+```
+jssonn/
+├── src/                    # Source code directory
+│   ├── components/        # React components
+│   ├── lib/              # Utility functions and shared logic
+│   ├── styles/           # Global styles and Tailwind config
+│   └── App.tsx           # Main application component
+├── public/               # Static assets
+├── index.html           # Entry HTML file
+├── package.json         # Project dependencies and scripts
+├── pnpm-lock.yaml      # pnpm lock file
+├── vite.config.ts      # Vite configuration
+├── tailwind.config.js  # Tailwind CSS configuration
+└── tsconfig.json       # TypeScript configuration
+```
+
+## Key Features
+1. JSON Beautification
+   - Format and prettify JSON data
+   - Syntax highlighting
+   - Copy to clipboard functionality
+
+2. Node-by-Node Viewing
+   - Interactive tree view of JSON structure
+   - Expandable/collapsible nodes
+   - Search and filter capabilities
+
+3. Subtree Visualization
+   - View and manipulate JSON subtrees
+   - Extract and copy subtree data
+   - Visual representation of node relationships
+
+## Development Setup
+1. Ensure you have pnpm installed:
+   ```bash
+   npm install -g pnpm
+   ```
+
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Start development server:
+   ```bash
+   pnpm dev
+   ```
+
+4. Build for production:
+   ```bash
+   pnpm build
+   ```
+
+## Component Architecture
+The application follows a component-based architecture using shadcn/ui components:
+- `JsonViewer`: Main component for displaying JSON data
+- `JsonTree`: Tree visualization component
+- `JsonBeautifier`: JSON formatting and beautification
+- `JsonSubtree`: Subtree visualization and manipulation
+
+## Best Practices
+1. Use TypeScript for type safety
+2. Follow React best practices and hooks
+3. Implement proper error handling for JSON parsing
+4. Ensure responsive design using Tailwind CSS
+5. Maintain accessibility standards
+6. Write unit tests for critical functionality
+
+## File Conventions
+- React components: PascalCase (e.g., `JsonViewer.tsx`)
+- Utility functions: camelCase (e.g., `jsonParser.ts`)
+- Test files: `*.test.tsx` or `*.spec.tsx`
+- Style files: `*.module.css` for CSS modules
+
+## Performance Considerations
+1. Implement virtual scrolling for large JSON structures
+2. Use memoization for expensive computations
+3. Lazy load components when possible
+4. Optimize JSON parsing and manipulation
+5. Implement proper caching strategies
