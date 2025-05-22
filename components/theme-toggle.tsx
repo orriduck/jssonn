@@ -1,28 +1,37 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
+import * as React from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
     // Optionally render a placeholder or nothing
-    return <button className="rounded-md p-2" aria-label="Toggle theme" style={{ width: 32, height: 32 }} />
+    return (
+      <Button
+        className="rounded-md p-2"
+        aria-label="Toggle theme"
+        style={{ width: 32, height: 32 }}
+      />
+    );
   }
 
   return (
-    <button
+    <Button
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       className="relative rounded-md p-2 hover:bg-accent flex items-center justify-center"
       aria-label="Toggle theme"
       style={{ width: 32, height: 32 }}
+      variant="ghost"
+      size="icon"
     >
       <Sun
         className={
@@ -39,6 +48,6 @@ export function ThemeToggle() {
         aria-hidden={theme === "light"}
       />
       <span className="sr-only">Toggle theme</span>
-    </button>
-  )
-} 
+    </Button>
+  );
+}

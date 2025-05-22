@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { ChevronRight, ChevronDown } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 interface JsonTreeViewProps {
   data: any
@@ -44,8 +45,8 @@ export const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, path = '', onN
   if (typeof data !== 'object' || data === null) {
     return (
       <div
-        className="flex items-center py-1 px-2 hover:bg-accent rounded cursor-pointer"
-        style={{ paddingLeft: `${level * 2 + 2}px` }}
+        className="flex items-center py-1 hover:bg-accent rounded cursor-pointer"
+        style={{ paddingLeft: `${level * 0.5 + 1}px` }}
         onClick={handleClick}
       >
         <span className="text-muted-foreground">{renderValue(data)}</span>
@@ -60,13 +61,15 @@ export const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, path = '', onN
   return (
     <div>
       <div
-        className="flex items-center py-1 px-2 hover:bg-accent rounded cursor-pointer"
-        style={{ paddingLeft: `${level * 2 + 2}px` }}
+        className="flex items-center py-1 hover:bg-accent rounded cursor-pointer"
+        style={{ paddingLeft: `${level * 0.5 + 1}px` }}
         onClick={handleClick}
       >
         <span className="font-semibold text-primary">{isArray ? '[ ]' : '{ }'}</span>
         <span className="ml-2 text-xs text-muted-foreground">{isArray ? `${items.length} items` : `${Object.keys(data).length} properties`}</span>
-        <span className="ml-2 text-xs text-muted-foreground">{expandedHere ? '▼' : '▶'}</span>
+        <span className="ml-2 text-xs text-muted-foreground">{expandedHere ? (
+          <ChevronDown className="w-4 h-4" />
+        ) : <ChevronRight className="w-4 h-4" />}</span>
       </div>
       {expandedHere && (
         <div>
@@ -78,8 +81,8 @@ export const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, path = '', onN
               <div key={key}>
                 {!isArray && (
                   <div
-                    className="flex items-center py-1 px-2 hover:bg-accent rounded cursor-pointer"
-                    style={{ paddingLeft: `${(level + 1) * 2 + 2}px` }}
+                    className="flex items-start py-1 hover:bg-accent/30 rounded cursor-pointer"
+                    style={{ paddingLeft: `${level * 0.5 + 1}px` }}
                     onClick={(e) => {
                       e.stopPropagation()
                       if (typeof value === 'object' && value !== null) {
@@ -96,8 +99,7 @@ export const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, path = '', onN
                       onNodeSelect(newPath, value)
                     }}
                   >
-                    <span className="text-primary">"{key}"</span>
-                    <span className="mx-1">:</span>
+                    <span className="text-primary font-mono rounded px-1 bg-muted">{key}</span>
                     {typeof value === 'object' && value !== null ? (
                       <JsonTreeView
                         data={value}
@@ -106,7 +108,7 @@ export const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, path = '', onN
                         level={level + 1}
                       />
                     ) : (
-                      <span className="text-muted-foreground">{renderValue(value)}</span>
+                      <span className="text-muted-foreground font-mono">{renderValue(value)}</span>
                     )}
                   </div>
                 )}
